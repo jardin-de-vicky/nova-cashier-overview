@@ -13,10 +13,10 @@ class DatabaseSubscriptionsController extends Controller
      */
     public function show($billableId)
     {
-        $stripeModel = Cashier::$customerModel;
+        $customerModel = Cashier::$customerModel;
 
         /** @var \Illuminate\Database\Eloquent\Model $billableModel */
-        $billableModel = (new $stripeModel());
+        $billableModel = (new $customerModel());
         /** @var \Laravel\Cashier\Billable|\Illuminate\Database\Eloquent\Model $billable */
         $billable = $billableModel->find($billableId);
 
@@ -43,7 +43,7 @@ class DatabaseSubscriptionsController extends Controller
     protected function formatSubscription(Subscription $subscription)
     {
         return array_merge($subscription->toArray(), [
-            'plan'            => $subscription->stripe_plan,
+            'plan'            => $subscription->stripe_price,
             'ended'           => $subscription->ended(),
             'cancelled'       => $subscription->cancelled(),
             'active'          => $subscription->active(),
