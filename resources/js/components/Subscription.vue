@@ -75,7 +75,7 @@ export default {
     fetchDatabaseSubscription() {
       Nova.request()
         .get(
-          `${this.baseEndpoint}billable/${this.resourceId}/?subscription=${this.subscriptionName}`
+          `${this.baseEndpoint}billable/${this.resourceId}?subscription=${this.subscriptionName}`
         )
         .then(res => {
           this.databaseSubscription = res.data.subscription;
